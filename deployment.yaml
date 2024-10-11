@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weatherapp
+  labels:
+    app: weatherapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weatherapp
+  # pod spec begins here
+  template:
+    metadata:
+      labels:
+        app: weatherapp
+    spec:
+      containers:
+        - name: weatherapp
+          image: registry.digitalocean.com/flask-weather-registry/flask-weather-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+      imagePullSecrets:
+        - name: regcred
+
